@@ -1,5 +1,5 @@
 import { Component, inject, Injectable } from '@angular/core';
-import { IUserDto } from '../../interfaces/iuser.interface';
+import { IUser, IUserDto, IUsersPage } from '../../interfaces/iuser.interface';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -19,7 +19,7 @@ export class ApiUsersService {
   private http = inject(HttpClient);
   private urlBase: string = 'https://peticiones.online/api/users/';
 
-  async getAllUsers(page?: number): Promise<IUserDto[]> {
+  async getAllUsers(page?: number): Promise<IUsersPage> {
     // Lógica para obtener todos los usuarios
 
     let params = {};
@@ -27,13 +27,13 @@ export class ApiUsersService {
     if (page) {
       params = { page: page.toString() };
     }
-    return await firstValueFrom(this.http.get<IUserDto[]>(this.urlBase, { params }));
+    return await firstValueFrom(this.http.get<IUsersPage>(this.urlBase, { params }));
   }
 
   async getUserById(id: string) {
     // Lógica para obtener un usuario por ID
     const urlUser = this.urlBase + id;
-    return await firstValueFrom(this.http.get<IUserDto>(urlUser));
+    return await firstValueFrom(this.http.get<IUser>(urlUser));
   }
 
   async createUser(user: IUserDto) {

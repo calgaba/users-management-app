@@ -1,15 +1,18 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApiUsersService } from '../../services/api-users/api-users.service';
+import { IUser, IUsersPage } from '../../interfaces/iuser.interface';
+import { UserCardComponent } from "../../shared/component/user-card/user-card.component";
 @Component({
   selector: 'app-home',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, UserCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
 
   usersService = inject(ApiUsersService);
+  usersList: IUser[] = [];
 
   ngOnInit(): void {
     this.loadUsers(2);
@@ -19,7 +22,8 @@ export class HomeComponent {
 
   async loadUsers(pageNumber?: number) {
     try{
-      const users = await this.usersService.getAllUsers(pageNumber);
+      const users: IUsersPage = await this.usersService.getAllUsers(pageNumber);
+      this.usersList = users.results;
       console.log("Users", users);
 
       const user = await this.usersService.getUserById('63740fede2c75d8744f80a49');

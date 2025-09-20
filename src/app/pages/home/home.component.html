@@ -1,12 +1,15 @@
-
 <main>
-  <router-outlet>
-
-  </router-outlet>
+  <div class="container mt-4">
+    <div class="row">
+      @for (user of usersList; track user._id) {
+        <div class="col-12 col-sm-6 col-md-3 mb-4">
+          <app-user-card [user]="user"></app-user-card>
+        </div>
+      }
+    </div>
+  </div>
 </main>
 
 <footer>
-
 </footer>
 <p>home works!</p>
-
