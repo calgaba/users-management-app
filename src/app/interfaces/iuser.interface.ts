@@ -1,10 +1,10 @@
 export interface IUser {
   id: number;
   _id: string;
-  userName: string;
+  username: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   image: string;
 }
@@ -18,10 +18,10 @@ export interface IUsersPage {
 }
 
 export interface IUserDto {
-  userName: string;
+  username: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
 }
 

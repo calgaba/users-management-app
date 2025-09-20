@@ -11,5 +11,8 @@ import { RouterLink } from '@angular/router';
 export class UserCardComponent {
   @Input() user!: IUser ;
 
+  ngOnInit(): void {
+    console.log("userCard", this.user);
+  }
 
 }
