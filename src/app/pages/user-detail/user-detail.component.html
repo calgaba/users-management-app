@@ -1,1 +1,26 @@
-<p>user-detail works!</p>
+
+
+<div  class="card shadow-sm">
+  @if(user){
+    <div class="card-body">
+      <div class="d-flex gap-3 align-items-center">
+        <img [src]="user.image" [alt]="user.first_name" class="rounded" style="width:120px;height:120px;object-fit:cover;">
+        <div>
+          <h2 class="h5 mb-1">{{ user.first_name }} {{ user.last_name }}</h2>
+          <div><strong>Nombre Usuario: </strong>{{ user.username }}</div>
+          <div><strong>Email:</strong> {{ user.email }}</div>
+        </div>
+      </div>
+
+      <div class="d-flex gap-2 mt-4">
+        <button [routerLink]="['/home']" class="btn btn-outline-secondary">Volver</button>
+        <a class="btn btn-warning text-white" [routerLink]="['/updateuser', user._id]">Actualizar</a>
+        <button class="btn btn-danger" (click)="onDelete()">Eliminar</button>
+      </div>
+    </div>
+  } @else {
+    <div class="card-body">
+      <p class="text-center">No se encontró el usuario.</p>
+    </div>
+  }
+</div>

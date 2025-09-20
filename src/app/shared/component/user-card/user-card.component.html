@@ -6,10 +6,10 @@
     <p class="text-muted mb-3">{{ user.username }} </p>
   </div>
   <div class="d-grid gap-2 d-md-grid position-absolute bottom-0 start-0 w-100 p-3" style="grid-template-columns: repeat(3, 1fr);">
-    <a [routerLink]="['/user', user.id]" class="btn btn-outline-secondary btn-sm">Ver</a>
-    <a [routerLink]="['/updateuser', user.id]" class="btn btn-warning btn-sm text-white">Actualizar</a>
+    <a [routerLink]="['/user', user._id]" class="btn btn-outline-secondary btn-sm">Ver</a>
+    <a [routerLink]="['/updateuser', user._id]" class="btn btn-warning btn-sm text-white">Actualizar</a>
     <button type="button" class="btn btn-danger btn-sm">
-      Borrar
+      Eliminar
     </button>
   </div>
 </div>
