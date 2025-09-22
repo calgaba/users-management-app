@@ -3,6 +3,7 @@ import { IUser } from '../../interfaces/iuser.interface';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { ApiUsersService } from '../../services/api-users/api-users.service';
 import { DeleteModalComponent } from "../../shared/component/delete-modal/delete-modal.component";
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-user-detail',
@@ -40,9 +41,8 @@ export class UserDetailComponent {
   async loadUser(id: string) {
     try {
       this.user = await this.usersService.getUserById(id);
-      console.log("GetUser:", this.user);
     } catch (error) {
-      console.error('Error loading users:', error);
+      toast.error('Error loading user details');
     }
   }
 

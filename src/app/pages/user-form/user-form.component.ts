@@ -39,7 +39,6 @@ export class UserFormComponent {
   ngOnInit() {
 
     const id = this.getUserIdFromUrl();
-    console.log("UserForm id:", id);
     this.isEdit = !!id;
     if (this.isEdit && id) {
       this.loadUser(id);
@@ -56,7 +55,6 @@ export class UserFormComponent {
  async loadUser(id: string) {
     try {
       this.user = await this.usersService.getUserById(id);
-      console.log("GetUser:", this.user);
       if (this.user) {
         this.isEdit = true;
         this.form.patchValue({
@@ -68,8 +66,7 @@ export class UserFormComponent {
         });
       }
     } catch (error) {
-      console.error('Error loading users:', error);
-    }
+      toast.error('Error loading user data'); }
   }
 
   mandatory(ctrl: string) {
