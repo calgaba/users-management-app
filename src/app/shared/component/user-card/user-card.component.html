@@ -8,9 +8,19 @@
   <div class="d-grid gap-2 d-md-grid position-absolute bottom-0 start-0 w-100 p-3" style="grid-template-columns: repeat(3, 1fr);">
     <a [routerLink]="['/user', user._id]" class="btn btn-outline-secondary btn-sm">Ver</a>
     <a [routerLink]="['/updateuser', user._id]" class="btn btn-warning btn-sm text-white">Actualizar</a>
-    <button type="button" class="btn btn-danger btn-sm">
+    <button type="button" class="btn btn-danger btn-sm" (click)="confirmDelete.open()">
       Eliminar
     </button>
   </div>
+
+   <!-- instancia del componente delete-modal -->
+  <app-delete-modal
+    #confirmDelete
+    [userId]="user._id"
+    [userName]="user.first_name + ' ' + user.last_name">
+  </app-delete-modal>
+
 </div>
+
+
 

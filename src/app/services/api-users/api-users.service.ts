@@ -30,27 +30,27 @@ export class ApiUsersService {
     return await firstValueFrom(this.http.get<IUsersPage>(this.urlBase, { params }));
   }
 
-  async getUserById(id: string) {
+  async getUserById(id: string): Promise<IUser> {
     // Lógica para obtener un usuario por ID
     const urlUser = this.urlBase + id;
     return await firstValueFrom(this.http.get<IUser>(urlUser));
   }
 
-  async createUser(user: IUserDto) {
+  async createUser(user: IUserDto): Promise<IUserDto> {
     // Lógica para crear un nuevo usuario
     const body = { ...user };
-    return await firstValueFrom(this.http.post(this.urlBase, body));
+    return await firstValueFrom(this.http.post<IUserDto>(this.urlBase, body));
   }
 
-  async updateUser(id: string, user: IUserDto) {
+  async updateUser(id: string, user: IUserDto): Promise<IUser> {
     // Lógica para actualizar un usuario existente
     const body = { ...user };
-    return await firstValueFrom(this.http.put(this.urlBase + id, body));
+    return await firstValueFrom(this.http.put<IUser>(this.urlBase + id, body));
   }
 
-  async deleteUser(id: string) {
+  async deleteUser(id: string): Promise<IUser> {
     // Lógica para eliminar un usuario
-    return await firstValueFrom(this.http.delete(this.urlBase + id));
+    return await firstValueFrom(this.http.delete<IUser>(this.urlBase + id));
   }
 
 }

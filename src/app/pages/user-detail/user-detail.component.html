@@ -15,7 +15,13 @@
       <div class="d-flex gap-2 mt-4">
         <button [routerLink]="['/home']" class="btn btn-outline-secondary">Volver</button>
         <a class="btn btn-warning text-white" [routerLink]="['/updateuser', user._id]">Actualizar</a>
-        <button class="btn btn-danger" (click)="onDelete()">Eliminar</button>
+        <button class="btn btn-danger" (click)="confirmDelete.open()">Eliminar</button>
+          <!-- instancia del componente delete-modal -->
+          <app-delete-modal
+            #confirmDelete
+            [userId]="user._id"
+            [userName]="user.first_name + ' ' + user.last_name">
+          </app-delete-modal>
       </div>
     </div>
   } @else {
@@ -23,4 +29,8 @@
       <p class="text-center">No se encontró el usuario.</p>
     </div>
   }
+
+
+
+
 </div>

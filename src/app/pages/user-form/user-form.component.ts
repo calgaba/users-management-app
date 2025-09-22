@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiUsersService } from '../../services/api-users/api-users.service';
 import { IUserDto } from '../../interfaces/iuser.interface';
+import { toast } from 'ngx-sonner';
 
 @Component({
   standalone: true,
@@ -13,6 +14,7 @@ import { IUserDto } from '../../interfaces/iuser.interface';
 export class UserFormComponent {
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private usersService = inject(ApiUsersService);
 
   isEdit = false;
@@ -31,7 +33,7 @@ export class UserFormComponent {
     username: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: [''], // requerido sólo en alta
-    image: [''] // si decides incluir URL de imagen en el form
+    image: ['', [Validators.required]]
   });
 
   ngOnInit() {
@@ -70,9 +72,9 @@ export class UserFormComponent {
     }
   }
 
-  invalid(ctrl: string) {
-    const c = this.form.get(ctrl);
-    return c && c.invalid && (c.dirty || c.touched);
+  mandatory(ctrl: string) {
+    const controlValue = this.form.get(ctrl);
+    return controlValue && controlValue.invalid && (controlValue.dirty || controlValue.touched)
   }
 
   async onSubmit() {
@@ -82,24 +84,23 @@ export class UserFormComponent {
     const id = this.route.snapshot.paramMap.get('id');
 
     if (!(this.isEdit && id) ) {
-      try{
-        //const { password, ...dto } = this.form.value as any; // password no se envía en edición
-
+      try {
         const createdUser = await
         this.usersService.createUser(this.form.value as any);
-        console.log('Created User:', createdUser);
-
-
+        toast.success(`Usuario ${createdUser.first_name} ${createdUser.last_name} creado correctamente`);
+        this.form.reset();
       } catch (error) {
-        console.error('Error creating user:', error);
+        toast.error('Error al crear usuario');
       }
     } else {
       try{
-       const updateUser = await this.usersService.updateUser(id, this.form.value as any);
-       console.log('updatedUser', updateUser);
+        const updateUser = await this.usersService.updateUser(id, this.form.value as any);
+        toast.success(`Usuario ${updateUser.first_name} ${updateUser.last_name} actualizado correctamente`);
+
       } catch (error) {
-        console.error('Error updating user:', error);
+        toast.error('Error al actualizar usuario');
       }
     }
+    this.router.navigate(['/home']);
   }
 }

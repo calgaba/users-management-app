@@ -7,35 +7,49 @@
         <div class="col-sm-6">
           <label class="form-label">Nombre</label>
           <input class="form-control" formControlName="first_name" />
-          <div class="invalid-feedback d-block" *ngIf="invalid('first_name')">Campo obligatorio</div>
+          @if(mandatory('first_name')){
+            <div class="invalid-feedback d-block">Campo obligatorio</div>
+          }
         </div>
         <div class="col-sm-6">
           <label class="form-label">Apellidos</label>
           <input class="form-control" formControlName="last_name" />
-          <div class="invalid-feedback d-block" *ngIf="invalid('last_name')">Campo obligatorio</div>
+          @if(mandatory('last_name')){
+            <div class="invalid-feedback d-block">Campo obligatorio</div>
+          }
         </div>
         <div class="col-sm-6">
           <label class="form-label">Usuario</label>
           <input class="form-control" formControlName="username" />
-          <div class="invalid-feedback d-block" *ngIf="invalid('username')">Campo obligatorio</div>
+          @if(mandatory('username')){
+            <div class="invalid-feedback d-block">Campo obligatorio</div>
+          }
         </div>
         <div class="col-sm-6">
           <label class="form-label">Email</label>
           <input class="form-control" formControlName="email" type="email" />
-          <div class="invalid-feedback d-block" *ngIf="invalid('email')">Email no válido</div>
+          @if(mandatory('email')){
+            <div class="invalid-feedback d-block">Campo obligatorio</div>
+          }
         </div>
 
         <div class="col-12">
           <label class="form-label">Imagen (URL)</label>
           <input class="form-control" formControlName="image" type="url" />
+          @if(mandatory('image')){
+            <div class="invalid-feedback d-block">Campo obligatorio</div>
+          }
         </div>
 
-
-        <div class="col-12" *ngIf="!isEdit">
+        @if(!isEdit){
+        <div class="col-12">
           <label class="form-label">Password</label>
           <input class="form-control" formControlName="password" type="password" />
-          <div class="invalid-feedback d-block" *ngIf="invalid('password')">Campo obligatorio</div>
+          @if (mandatory('password')){
+            <div class="invalid-feedback d-block">Campo obligatorio</div>
+          }
         </div>
+        }
       </div>
 
       <div class="d-flex gap-2 mt-4">

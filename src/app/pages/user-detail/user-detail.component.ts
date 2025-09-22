@@ -2,14 +2,16 @@ import { Component, inject } from '@angular/core';
 import { IUser } from '../../interfaces/iuser.interface';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { ApiUsersService } from '../../services/api-users/api-users.service';
+import { DeleteModalComponent } from "../../shared/component/delete-modal/delete-modal.component";
 
 @Component({
   selector: 'app-user-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, DeleteModalComponent],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.css'
 })
 export class UserDetailComponent {
+
   user: IUser = {
     id: 0,
     _id: '',
@@ -44,8 +46,6 @@ export class UserDetailComponent {
     }
   }
 
-  onDelete() {
-    //TODO
-    throw new Error('Method not implemented.');
-  }
+
+
 }
