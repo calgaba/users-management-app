@@ -34,7 +34,7 @@ export class DeleteModalComponent {
       cancel: {
         label: 'Cancelar',
         onClick: () => {
-          toast.info('Acción cancelada');
+          //toast.info('Acción cancelada');
         }
       },
       duration: Number.POSITIVE_INFINITY

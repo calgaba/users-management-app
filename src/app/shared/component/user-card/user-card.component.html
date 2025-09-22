@@ -1,17 +1,19 @@
-<div class="card h-100 shadow-sm position-relative">
+<div class="card h-100 shadow-sm position-relative p-3">
   <div class="card-body text-center pb-5">
     <img [src]="user.image" [alt]="user.first_name"
          class="rounded-circle mb-3" style="width:96px;height:96px;object-fit:cover;">
     <h5 class="card-title mb-1">{{ user.first_name }} {{ user.last_name }}</h5>
     <p class="text-muted mb-3">{{ user.username }} </p>
   </div>
-  <div class="d-grid gap-2 d-md-grid position-absolute bottom-0 start-0 w-100 p-3" style="grid-template-columns: repeat(3, 1fr);">
-    <a [routerLink]="['/user', user._id]" class="btn btn-outline-secondary btn-sm">Ver</a>
-    <a [routerLink]="['/updateuser', user._id]" class="btn btn-warning btn-sm text-white">Actualizar</a>
-    <button type="button" class="btn btn-danger btn-sm" (click)="confirmDelete.open()">
-      Eliminar
-    </button>
-  </div>
+
+  <div class="d-flex justify-content-center gap-2 mt-3 pb-4 position-absolute bottom-0 start-50 translate-middle-x">
+  <a [routerLink]="['/user', user._id]" class="btn btn-outline-secondary btn-sm">Ver</a>
+  <a [routerLink]="['/updateuser', user._id]" class="btn btn-warning btn-sm text-white">Actualizar</a>
+  <button type="button" class="btn btn-danger btn-sm" (click)="confirmDelete.open()">
+    Eliminar
+  </button>
+</div>
+
 
    <!-- instancia del componente delete-modal -->
   <app-delete-modal
