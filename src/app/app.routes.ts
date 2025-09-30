@@ -11,7 +11,4 @@ export const routes: Routes = [
   { path: 'updateuser/:id', component: UserFormComponent },
   { path: '**', redirectTo: 'home' }
 
-
-
-
 ];

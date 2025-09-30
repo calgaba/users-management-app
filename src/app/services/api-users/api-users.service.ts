@@ -20,7 +20,6 @@ export class ApiUsersService {
   private urlBase: string = 'https://peticiones.online/api/users/';
 
   async getAllUsers(page?: number): Promise<IUsersPage> {
-    // Lógica para obtener todos los usuarios
 
     let params = {};
 
@@ -31,25 +30,21 @@ export class ApiUsersService {
   }
 
   async getUserById(id: string): Promise<IUser> {
-    // Lógica para obtener un usuario por ID
     const urlUser = this.urlBase + id;
     return await firstValueFrom(this.http.get<IUser>(urlUser));
   }
 
   async createUser(user: IUserDto): Promise<IUserDto> {
-    // Lógica para crear un nuevo usuario
     const body = { ...user };
     return await firstValueFrom(this.http.post<IUserDto>(this.urlBase, body));
   }
 
   async updateUser(id: string, user: IUserDto): Promise<IUser> {
-    // Lógica para actualizar un usuario existente
     const body = { ...user };
     return await firstValueFrom(this.http.put<IUser>(this.urlBase + id, body));
   }
 
   async deleteUser(id: string): Promise<IUser> {
-    // Lógica para eliminar un usuario
     return await firstValueFrom(this.http.delete<IUser>(this.urlBase + id));
   }
 
